@@ -24,11 +24,9 @@ def quicksort(arr):
     return quicksort(less) + equal + quicksort(greater)
 
 
-if __name__ == "__main__":
-
-    arr_random = [random.randint(0, 1000) for i in range(1000)]
-    start_time = time.time()
-    sorted_arr = quicksort(arr_random)
-    end_time = time.time()
-    print("Рандомно отсортированный массив:", sorted_arr)
-    print("Время выполнения сортировки на рандомном массиве: {:.6f} секунд".format(end_time - start_time))
+arr_random = [random.randint(0, 1000) for i in range(1000)]
+start_time = time.time()
+sorted_arr = quicksort(arr_random)
+end_time = time.time()
+print("Рандомно отсортированный массив:", sorted_arr)
+print("Время выполнения сортировки на рандомном массиве: {:.6f} секунд".format(end_time - start_time))
