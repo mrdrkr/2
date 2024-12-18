@@ -1,6 +1,4 @@
 import math
-
-
 class Solution:
     def __init__(self):#инициализирует списки для хранения
         self.segments = []
@@ -27,52 +25,52 @@ class Solution:
     def calculate_area_ratio(self, x1, y1, x2, y2):
         if x1 == x2 == y1 == y2:
             return(0,0)
-        if (x1 == x2) and (y1 != y2):  # Вертикальный отрезок
+        if (x1 == x2) and (y1 != y2):  #вертикальный отрезок
             if x1 == 0 or x1 == 1:
                 return (0, 0)
-            area1 = x1  # Левая площадь
-            area2 = 1 - x1  # Правая площадь
+            area1 = x1  #левая площадь
+            area2 = 1 - x1  #правая площадь
             return(area1,area2)
-        if (y1 == y2) and (x1 != x2):  # Горизонтальный отрезок
+        if (y1 == y2) and (x1 != x2):  #горизонтальный отрезок
             if y1 == 0 or y1 == 1:
                 return (0, 0)
-            area1 = y1  # Нижняя площадь
-            area2 = 1 - y1  # Верхняя площадь
+            area1 = y1  #нижняя площадь
+            area2 = 1 - y1  #верхняя площадь
             return (area1, area2)
         if ((y1 == x1 == 0) and (y2 == x2 == 1)) or ((y1 == x1 == 1) and (y2 == x2 == 0)):
             return(0.5,0.5)
-        else:  # Наклонный отрезок
+        else:  #наклонный отрезок
             intersections = []
 
-            # пересечение с y = 0
+            #пересечение с y = 0
             if (y1 * y2) <= 0:
                 if y1 != y2:
                     x = x1 + (x2 - x1) * (-y1) / (y2 - y1)
                     if x >= 0 and x <= 1:
                         intersections.append((x, 0))
 
-            # пересечение с y = 1
+            #пересечение с y = 1
             if (1 - y1) * (1 - y2) <= 0:
                 if y1 != y2:
                     x = x1 + (x2 - x1) * (1 - y1) / (y2 - y1)
                     if x >= 0 and x <= 1:
                         intersections.append((x, 1))
 
-            # пересечение с x = 0
+            #пересечение с x = 0
             if (x1 * x2) <= 0:
                 if x1 != x2:
                     y = y1 + (y2 - y1) * (-x1) / (x2 - x1)
                     if y >= 0 and y <= 1:
                         intersections.append((0, y))
 
-            # пересечение с x = 1
+            #пересечение с x = 1
             if (1 - x1) * (1 - x2) <= 0:
                 if x1 != x2:
                     y = y1 + (y2 - y1) * (1 - x1) / (x2 - x1)
                     if y >= 0 and y <= 1:
                         intersections.append((1, y))
 
-            # Вычисление площадей по пересечениям
+            #вычисление площадей по пересечениям
             if len(intersections) == 0 or len(intersections) == 1:
                 return (0, 0)
             else:
@@ -85,7 +83,7 @@ class Solution:
                 return (area1, area2)
 
 
-    def find_intersections(self):#находит точки пересечения у отрезков, всё находится с помощью определителя
+    def find_intersections(self):#находит точки пересечения у отрезков, всё находится с помощью определителя, используя метод Крамера
         for i in range(len(self.segments)):
             x1, y1, x2, y2, seg1 = self.segments[i]
             for j in range(i + 1, len(self.segments)):
@@ -93,7 +91,7 @@ class Solution:
 
                 det = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4)
 
-                if det == 0:  # Отрезки параллельны или совпадают
+                if det == 0:  #отрезки параллельны или совпадают
                     continue
                 #точки пересечения
                 px = ((x1 * y2 - y1 * x2) * (x3 - x4) - (x1 - x2) * (x3 * y4 - y3 * x4)) / det
